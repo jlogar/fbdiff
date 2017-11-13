@@ -1,0 +1,11 @@
+﻿.vs
+bin/
+obj/
+src/FbDiff/Firebird-2.5.7.27050-0_x64_embed*
+packages
+src/FbDiff/*.dll
+src/FbDiff/firebird.log
+src/FbDiff/firebird.msg
+src/FbDiff/Microsoft.VC80.CRT.manifest
+src/FbDiff/SRC.FDB
+src/FbDiff/TRG.FDB
