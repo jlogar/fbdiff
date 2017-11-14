@@ -2,6 +2,20 @@
 
 ## about
 
-fbdiff is a [Firebird](https://firebirdsql.org/) database diff calculator.
+fbdiff is a [Firebird](https://firebirdsql.org/) database diff calculator. **WIP!!!**
 
-WIP
+Need a compare tool for a project. Since there's none I could find that would fit my needs (apart from the commercial ones like ) I'm writing my own.
+
+Expect to support
+- fields (type, length, nullability(?))
+- PKs
+- FKs
+- ...
+
+I'd also like to have a way to offer a model of the src/trg databases, not only a change script.
+
+## alternatives
+
+- [ibexpert](http://ibexpert.net/ibe/pmwiki.php?n=Doc.DatabaseComparer)
+- non FB specific ones?
+- and http://www.firebirdfaq.org/faq210/
