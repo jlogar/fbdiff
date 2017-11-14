@@ -17,5 +17,6 @@ I'd also like to have a way to offer a model of the src/trg databases, not only 
 ## alternatives
 
 - [ibexpert](http://ibexpert.net/ibe/pmwiki.php?n=Doc.DatabaseComparer)
+- [SO on the topic](https://stackoverflow.com/questions/1233980/firebird-database-schema-data-difference-tool)
 - non FB specific ones?
 - and http://www.firebirdfaq.org/faq210/
