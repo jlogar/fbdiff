@@ -36,14 +36,14 @@ module Input =
             Fields = Seq.toList a
             }
     let mapToFks (fields: Field seq) (fkeys: FkSource seq) =
-        let name = (Seq.head fkeys).KeyName
-        let fks = fkeys |> Seq.groupBy (fun x -> x.KeyName)
-        let a = fkeys |> Seq.map (fun idx -> Seq.find (fun (f:Field)->f.Name = idx.FieldName) fields)
-        fks|> Seq.map (fun (fk, fields)-> {
-                                            Name = name
-                                            Fields = Seq.toList a
-                                            RefTable = Identifier.Create "blala"
-                                            }
+        let fkByName = fkeys |> Seq.groupBy (fun x -> (x.KeyName, x.RefTableName))
+        fkByName |> Seq.map (fun ((fkName, refTableName), fkSourceFields) ->
+                                let fkNames = fkSourceFields |> Seq.map (fun x->x.FieldName)
+                                {
+                                                                Name = fkName
+                                                                Fields = fields|> Seq.filter (fun f->fkNames|>Seq.contains f.Name)|>Seq.toList
+                                                                RefTable = refTableName
+                                                                }
                         )
     let mapToTable indices fkeys (tableName, fields:FieldEntry seq) =
         let primaryIndices = indices

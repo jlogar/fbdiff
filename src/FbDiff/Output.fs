@@ -43,7 +43,7 @@ module Output =
         let alterScript = differingTables |> List.map toAlterScript
         Seq.append createScript alterScript
     let getMissingTables src trg = src |> Seq.filter (fun s -> not (trg |> Seq.map (fun x->x.Name) |> Seq.contains s.Name))
-    let getMissingFields (src, trg) =
+    let getMissingFields src trg =
         src.Fields |> List.filter (fun sf -> not (trg.Fields |> Seq.exists (fun tf->tf.Name = sf.Name)))
     let isSameField srcField (trgField:Field) = srcField = trgField
     let getDiffFields (srcFields: Field list) (trgFields: Field list) =
@@ -60,13 +60,15 @@ module Output =
                                             | (sf,tf) -> Ok {SrcField = sf; TrgField = tf}
                                             )
         diffFields
+    let getDeprecatedFields srcTable trgTable missingFields diffFields=
+        List.empty
     let findByName s name = s |> Seq.find (fun x->x.Name = name)
     let compareTable (srcTable, trgTable) =
         printfn "comparing: %s" srcTable.Name.unbox
-        let missing = getMissingFields (srcTable,trgTable)
+        let missing = getMissingFields srcTable trgTable
         let diffFields = getDiffFields (srcTable.Fields |> List.except missing) trgTable.Fields
         //heh, need to get deprecated fields too, right? :)
-        //let deprecatedFields =
+        let deprecatedFields = getDeprecatedFields srcTable trgTable missing diffFields
         printfn "src FKs: %A" srcTable.Fks
         printfn "trg FKs: %A" trgTable.Fks
         let missingFks = srcTable.Fks |> Seq.except trgTable.Fks

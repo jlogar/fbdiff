@@ -90,6 +90,7 @@
     <Compile Include="Output.fs" />
     <Compile Include="Program.fs" />
     <None Include=".gitignore" />
+    <None Include="test_input.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FirebirdSql.Data.FirebirdClient">
